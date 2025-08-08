@@ -1,0 +1,132 @@
+/* Navigation Styles */
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: hsl(var(--background) / 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.5s ease-out;
+}
+
+.navigation.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.navigation.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navigation-container {
+  max-width: 112rem;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.navigation-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navigation-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navigation-logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation-logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* CTA Button */
+.navigation-cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navigation-download-button {
+  background: #ffffff;
+  color: #000000;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.navigation-download-button:hover {
+  background: #f3f4f6;
+}
+
+/* Mobile Menu */
+.navigation-mobile-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  color: hsl(var(--foreground));
+}
+
+.navigation-mobile-menu {
+  margin-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid hsl(var(--border) / 0.5);
+  padding-top: 16px;
+}
+
+.navigation-mobile-download {
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.navigation-mobile-download:hover {
+  background: #f3f4f6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navigation-mobile-button {
+    display: block;
+  }
+  
+  .navigation-cta {
+    display: none;
+  }
+}

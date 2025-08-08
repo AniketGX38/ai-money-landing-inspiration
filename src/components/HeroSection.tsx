@@ -1,59 +1,78 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import "./HeroSection.css";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="hero-section">
       {/* Beam Effects */}
-      <div className="absolute inset-0">
-        {/* Rotating Conic Beam */}
-        <div className="absolute inset-0 bg-beam-effect opacity-30" />
+      <div className="hero-beam-container">
         {/* Radial Beam from Top */}
-        <div className="absolute inset-0 bg-beam-radial animate-beam-pulse" />
-        {/* Additional Beam Rays */}
-        <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-primary/20 via-transparent to-transparent transform -translate-x-1/2" />
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent transform -translate-y-1/2" />
+        <div className="hero-beam-radial" />
+        {/* Subtle Diagonal Beams - Copilot Style */}
+        <div className="hero-beam-diagonal" />
+        <div className="hero-beam-diagonal-2" />
+        <div className="hero-beam-diagonal-3" />
       </div>
       
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+      <div className="hero-grid-pattern" />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-hero" />
+      <div className="hero-gradient-overlay" />
+      
+      {/* Shadow Overlay */}
+      <div className="hero-shadow-overlay" />
       
       {/* Floating Elements */}
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float opacity-60" />
-      <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-accent rounded-full animate-float opacity-40" style={{ animationDelay: '1s' }} />
-      <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50" style={{ animationDelay: '2s' }} />
+      <div className="hero-floating-element hero-floating-1" />
+      <div className="hero-floating-element hero-floating-2" />
+      <div className="hero-floating-element hero-floating-3" />
+      
+      {/* Additional floating particles */}
+      <div className="hero-floating-element" style={{
+        top: '15%', right: '20%', width: '3px', height: '3px',
+        background: 'hsl(var(--accent))', opacity: 0.4,
+        animation: 'float 4s ease-in-out infinite, fade-in-out 3s ease-in-out infinite',
+        animationDelay: '0.5s'
+      }} />
+      <div className="hero-floating-element" style={{
+        bottom: '20%', left: '15%', width: '5px', height: '5px',
+        background: 'hsl(var(--primary))', opacity: 0.3,
+        animation: 'float 5s ease-in-out infinite, fade-in-out 4s ease-in-out infinite',
+        animationDelay: '2.5s'
+      }} />
+      <div className="hero-floating-element" style={{
+        top: '60%', right: '15%', width: '2px', height: '2px',
+        background: 'hsl(var(--accent))', opacity: 0.5,
+        animation: 'float 3.5s ease-in-out infinite, fade-in-out 2.5s ease-in-out infinite',
+        animationDelay: '1.8s'
+      }} />
       
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div className="hero-content">
         {/* Logo/Icon */}
-        <div className="mb-8 flex justify-center">
-          <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center animate-glow-pulse">
+        <div className="hero-logo">
+          <div className="hero-logo-icon">
             <Sparkles className="w-8 h-8 text-background" />
           </div>
         </div>
         
         {/* Main Heading */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-          <span className="text-gradient">Copilot Intelligence</span>
+        <h1 className="hero-heading">
+          <span className="hero-heading-gradient">X38 AI Labs</span>
         </h1>
         
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <p className="hero-subtitle">
           AI-Powered Financial Navigation
         </p>
         
         {/* CTA Button */}
-        <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <Button 
-            size="lg" 
-            className="bg-white text-background hover:bg-accent/90 transition-smooth text-lg px-8 py-6 rounded-xl font-semibold group"
-          >
-            Try free for 30 days
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+        <div className="hero-cta-container">
+          <button className="hero-cta-button">
+            <span className="hero-cta-text">Try free for 30 days</span>
+          </button>
         </div>
       </div>
     </section>

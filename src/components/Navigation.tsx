@@ -1,52 +1,77 @@
-import { Button } from "@/components/ui/button";
 import { Download, Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "./Navigation.css";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Get viewport height to determine when second section is in center
+          const viewportHeight = window.innerHeight;
+          const scrollPosition = window.scrollY;
+          
+          // Show navbar when user has scrolled past the first section (roughly viewport height)
+          const showNavThreshold = viewportHeight * 0.8; // Show when 80% through first section
+          
+          setIsVisible(scrollPosition > showNavThreshold);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+
+    // Cleanup
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+    <nav className={`navigation ${isVisible ? 'visible' : 'hidden'}`}>
+      <div className="navigation-container">
+        <div className="navigation-content">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center">
+          <div className="navigation-logo">
+            <div className="navigation-logo-icon">
               <span className="text-background font-bold text-lg">C</span>
             </div>
-            <span className="font-bold text-xl">Copilot</span>
+            <span className="navigation-logo-text">X38</span>
           </div>
 
           {/* CTA Button */}
-          <div className="flex items-center gap-4">
-            <Button 
-              className="bg-white text-black hover:bg-gray-100 px-6 py-2 rounded-lg font-medium transition-smooth"
-            >
-              <Download className="w-4 h-4 mr-2" />
+          <div className="navigation-cta">
+            <button className="navigation-download-button">
+              <Download className="w-4 h-4" />
               Download
-            </Button>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
+          <button
+            className="navigation-mobile-button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu className="w-5 h-5" />
-          </Button>
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4 border-t border-border/50 pt-4">
-            <Button 
-              className="w-full bg-white text-black hover:bg-gray-100"
-            >
-              <Download className="w-4 h-4 mr-2" />
+          <div className="navigation-mobile-menu">
+            <button className="navigation-mobile-download">
+              <Download className="w-4 h-4" />
               Download
-            </Button>
+            </button>
           </div>
         )}
       </div>
