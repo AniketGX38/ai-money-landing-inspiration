@@ -6,7 +6,16 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: transparent;
+  background: url('/hero-background.png') center center / cover no-repeat,
+              transparent ;
+}
+
+/* Background Image Opacity Overlay */
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--background) / 0.7);
+  z-index: 0;
 }
 
 /* Enhanced Background Effects */
@@ -18,8 +27,7 @@
     radial-gradient(ellipse 800px 600px at 30% 20%, hsl(var(--primary) / 0.08) 0%, transparent 60%),
     radial-gradient(ellipse 600px 400px at 70% 80%, hsl(var(--accent) / 0.06) 0%, transparent 60%),
     linear-gradient(135deg, transparent 0%, hsl(var(--primary) / 0.02) 50%, transparent 100%);
-  animation: subtle-shift 15s ease-in-out infinite;
-  z-index: 0;
+  z-index: 1;
 }
 
 .hero-section::after {
@@ -30,7 +38,6 @@
     radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.04) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.03) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.02) 0%, transparent 70%);
-  animation: subtle-shift 12s ease-in-out infinite reverse;
   z-index: 0;
 }
 
@@ -40,123 +47,78 @@
   inset: 0;
 }
 
-.hero-beam-effect {
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-beam);
-  opacity: 0.3;
-  animation: rotate-beam 20s linear infinite;
-}
-
-.hero-beam-radial {
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-beam-radial);
-  animation: beam-pulse 3s ease-in-out infinite;
-}
-
-.hero-beam-vertical {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, hsl(var(--primary) / 0.2), transparent, transparent);
-  transform: translateX(-50%);
-}
-
-.hero-beam-horizontal {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.1), transparent);
-  transform: translateY(-50%);
-}
-
 .hero-beam-diagonal {
   position: absolute;
-  top: 30%;
+  top: 20%;
   left: 20%;
-  width: 20%;
+  width: 10%;
   height: 1px;
   background: linear-gradient(
     to right,
     transparent 0%,
     hsl(var(--primary) / 0.4) 20%,
-    hsl(var(--primary) / 0.5) 40%,
-    hsl(var(--primary) / 0.7) 50%,
-    hsl(var(--primary) / 0.8) 60%,
+    hsl(var(--primary) / 0.6) 40%,
+    hsl(var(--primary) / 0.8) 50%,
     hsl(var(--primary) / 0.9) 80%,
-    transparent 100%
+    hsl(var(--primary) / 1) 100%
   );
-  transform: rotate(10deg);
-  transform-origin: center;
+  transform: rotate(60deg);
+  transform-origin: right;
   opacity: 0;
-  animation: copilot-beam-sweep 8s ease-in-out infinite;
+  animation: beam-sweep 2.5s ease-out infinite 12s;
   filter: blur(0.5px);
 }
 
-.hero-beam-diagonal-2 {
-  position: absolute;
-  top: 60%;
-  right: 25%;
-  width: 50%;
-  height: 0.3px;
-  background: linear-gradient(
-    to left,
-    transparent 0%,
-    hsl(var(--accent) / 0.08) 25%,
-    hsl(var(--accent) / 0.2) 45%,
-    hsl(var(--accent) / 0.4) 50%,
-    hsl(var(--accent) / 0.2) 55%,
-    hsl(var(--accent) / 0.08) 75%,
-    transparent 100%
-  );
-  transform: rotate(-12deg);
-  transform-origin: center;
-  opacity: 0;
-  animation: copilot-beam-sweep-reverse 12s ease-in-out infinite;
+/* Multiple beam variations - Sequential timing */
+.hero-beam-diagonal:nth-child(1) {
+  animation-delay: 0s;
+  animation-duration: 4s;
+}
+
+.hero-beam-diagonal:nth-child(2) {
   animation-delay: 4s;
-  filter: blur(0.3px);
+  animation-duration: 4s;
+  top: 10%;
+  left: 25%;
+  transform: rotate(45deg);
 }
 
-.hero-beam-diagonal-3 {
-  position: absolute;
-  top: 45%;
-  left: 10%;
-  width: 80%;
-  height: 0.2px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    hsl(var(--primary) / 0.05) 30%,
-    hsl(var(--primary) / 0.15) 45%,
-    hsl(var(--primary) / 0.3) 50%,
-    hsl(var(--primary) / 0.15) 55%,
-    hsl(var(--primary) / 0.05) 70%,
-    transparent 100%
-  );
-  transform: rotate(3deg);
-  transform-origin: center;
-  opacity: 0;
-  animation: copilot-beam-sweep-slow 15s ease-in-out infinite;
-  animation-delay: 7s;
-  filter: blur(0.2px);
+.hero-beam-diagonal:nth-child(3) {
+  animation-delay: 6s;
+  animation-duration: 4s;
+  top: 20%;
+  left: 15%;
+  transform: rotate(75deg);
+  width: 10%;
 }
 
-/* Background Pattern */
+.hero-beam-diagonal:nth-child(4) {
+  animation-delay: 10s;
+  animation-duration: 4s;
+  top: 15%;
+  left: 30%;
+  transform: rotate(30deg);
+  width: 10%;
+}
+
+
+/* Background Pattern - Copilot Style */
 .hero-grid-pattern {
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.15) 1px, transparent 0),
-    linear-gradient(90deg, hsl(var(--primary) / 0.02) 1px, transparent 1px),
-    linear-gradient(0deg, hsl(var(--primary) / 0.02) 1px, transparent 1px);
-  background-size: 40px 40px, 40px 40px, 40px 40px;
-  opacity: 0.3;
-  animation: grid-drift 20s linear infinite;
+    radial-gradient(circle at 1px 1px, 
+      hsla(220, 100%, 90%, 0.4) 0.5px, 
+      transparent 0.5px),
+    radial-gradient(circle at 1px 1px, 
+      hsla(200, 80%, 85%, 0.2) 0.5px, 
+      transparent 0.5px);
+  background-size: 32px 32px, 64px 64px;
+  background-position: 0 0, 16px 16px;
+  opacity: 0.6;
+  animation: copilot-grid-drift 25s linear infinite;
+  mask: radial-gradient(ellipse 80% 60% at center, black 0%, transparent 100%);
+  -webkit-mask: radial-gradient(ellipse 80% 60% at center, black 0%, transparent 100%);
 }
 
 /* Gradient Overlay */
@@ -164,6 +126,93 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.1) 50%, transparent 100%);
+}
+
+/* Glittery Squares */
+.hero-glitter-squares {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-glitter-square {
+  position: absolute;
+  background: linear-gradient(45deg, 
+    hsla(220, 100%, 90%, 0.3) 0%,
+    hsla(200, 80%, 85%, 0.4) 25%,
+    hsla(220, 90%, 95%, 0.5) 50%,
+    hsla(200, 80%, 85%, 0.4) 75%,
+    hsla(220, 100%, 90%, 0.3) 100%);
+  border: 1px solid hsla(220, 100%, 95%, 0.2);
+  backdrop-filter: blur(2px);
+  border-radius: 4px;
+  animation: glitter-sparkle 4s ease-in-out infinite;
+}
+
+.hero-glitter-square::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, 
+    hsla(220, 100%, 100%, 0.4) 0%, 
+    transparent 70%);
+  border-radius: 4px;
+  animation: glitter-pulse 2s ease-in-out infinite;
+}
+
+.hero-glitter-square::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  right: 20%;
+  bottom: 20%;
+  background: linear-gradient(135deg, 
+    hsla(220, 100%, 100%, 0.6) 0%,
+    transparent 50%);
+  border-radius: 2px;
+  animation: glitter-shimmer 3s ease-in-out infinite;
+}
+
+.hero-glitter-1 {
+  top: 35%;
+  left: 15%;
+  width: 120px;
+  height: 16px;
+  animation-delay: 0s;
+}
+
+.hero-glitter-2 {
+  top: 50%;
+  right: 20%;
+  width: 80px;
+  height: 12px;
+  animation-delay: 1.5s;
+}
+
+.hero-glitter-3 {
+  top: 40%;
+  left: 60%;
+  width: 100px;
+  height: 14px;
+  animation-delay: 3s;
+}
+
+.hero-glitter-4 {
+  bottom: 40%;
+  left: 25%;
+  width: 90px;
+  height: 10px;
+  animation-delay: 0.8s;
+}
+
+.hero-glitter-5 {
+  bottom: 35%;
+  right: 15%;
+  width: 110px;
+  height: 15px;
+  animation-delay: 2.2s;
 }
 
 /* Shadow Overlay */
@@ -214,7 +263,7 @@
 /* Main Content */
 .hero-content {
   position: relative;
-  z-index: 20;
+  z-index: 0;
   text-align: center;
   padding: 0 24px;
   max-width: 64rem;
@@ -223,32 +272,34 @@
 
 /* Logo Icon */
 .hero-logo {
-  margin-bottom: 32px;
   display: flex;
   justify-content: center;
+  background: transparent;
 }
 
 .hero-logo-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--gradient-primary);
-  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.hero-logo-icon svg {
+  width: 100px;
+  height: 100px;
+  background: transparent;
 }
 
 /* Heading */
 .hero-heading {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 24px;
   animation: fade-in 0.6s ease-out;
 }
 
 .hero-heading-gradient {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, hsl(194, 94%, 61%) 0%, hsl(203, 76%, 77%) 100%);
+  background-image:linear-gradient(0deg, rgb(61, 141, 245) 0%, rgba(204, 222, 245, 0.9) 81.7145%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -328,16 +379,6 @@
 }
 
 /* Animations */
-@keyframes rotate-beam {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes beam-pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
 @keyframes fade-in {
   0% { 
     opacity: 0; 
@@ -359,77 +400,90 @@
   50% { box-shadow: 0 0 60px hsl(var(--primary) / 0.5); }
 }
 
-@keyframes subtle-shift {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(10px, -5px) scale(1.02); }
-  50% { transform: translate(-5px, 10px) scale(0.98); }
-  75% { transform: translate(8px, 3px) scale(1.01); }
-}
-
-@keyframes grid-drift {
+@keyframes copilot-grid-drift {
   0% { transform: translate(0, 0); }
-  100% { transform: translate(40px, 40px); }
+  25% { transform: translate(8px, -4px); }
+  50% { transform: translate(-4px, 8px); }
+  75% { transform: translate(6px, 2px); }
+  100% { transform: translate(0, 0); }
 }
 
-@keyframes fade-in-out {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-
-/* Copilot-style beam animations */
-@keyframes copilot-beam-sweep {
-  0%, 90%, 100% { 
-    opacity: 0;
-    transform: rotate(8deg) translateX(-50%) scaleX(0.8);
-  }
-  5% { 
+/* Glitter Animations */
+@keyframes glitter-sparkle {
+  0%, 100% { 
     opacity: 0.3;
-    transform: rotate(8deg) translateX(-20%) scaleX(1);
-  }
-  15% { 
-    opacity: 0.6;
-    transform: rotate(8deg) translateX(20%) scaleX(1);
+    transform: translateY(0px) scaleX(1);
+    filter: brightness(1);
   }
   25% { 
-    opacity: 0.3;
-    transform: rotate(8deg) translateX(50%) scaleX(0.8);
+    opacity: 0.6;
+    transform: translateY(-2px) scaleX(1.1);
+    filter: brightness(1.3);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: translateY(-1px) scaleX(1.05);
+    filter: brightness(1.5);
+  }
+  75% { 
+    opacity: 0.5;
+    transform: translateY(-3px) scaleX(1.08);
+    filter: brightness(1.2);
   }
 }
 
-@keyframes copilot-beam-sweep-reverse {
-  0%, 90%, 100% { 
-    opacity: 0;
-    transform: rotate(-12deg) translateX(50%) scaleX(0.6);
-  }
-  8% { 
+@keyframes glitter-pulse {
+  0%, 100% { 
     opacity: 0.2;
-    transform: rotate(-12deg) translateX(20%) scaleX(1);
+    transform: scale(0.8);
   }
-  18% { 
-    opacity: 0.4;
-    transform: rotate(-12deg) translateX(-20%) scaleX(1);
-  }
-  28% { 
-    opacity: 0.2;
-    transform: rotate(-12deg) translateX(-50%) scaleX(0.6);
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.2);
   }
 }
 
-@keyframes copilot-beam-sweep-slow {
-  0%, 85%, 100% { 
-    opacity: 0;
-    transform: rotate(3deg) translateX(-60%) scaleX(0.5);
-  }
-  10% { 
-    opacity: 0.15;
-    transform: rotate(3deg) translateX(-10%) scaleX(1);
-  }
-  20% { 
+@keyframes glitter-shimmer {
+  0%, 100% { 
     opacity: 0.3;
-    transform: rotate(3deg) translateX(30%) scaleX(1);
+    transform: translateX(-20%) rotate(0deg);
   }
-  30% { 
-    opacity: 0.15;
-    transform: rotate(3deg) translateX(60%) scaleX(0.5);
+  33% { 
+    opacity: 0.7;
+    transform: translateX(0%) rotate(45deg);
+  }
+  66% { 
+    opacity: 0.5;
+    transform: translateX(20%) rotate(90deg);
+  }
+}
+
+@keyframes beam-sweep {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 30deg)) translateX(-150%);
+  }
+  
+  10% {
+    opacity: 0.3;
+  }
+  
+  25% {
+    opacity: 1;
+    transform: rotate(var(--rotation, 30deg)) translateX(0%);
+  }
+  
+  75% {
+    opacity: 1;
+    transform: rotate(var(--rotation, 30deg)) translateX(100%);
+  }
+  
+  90% {
+    opacity: 0.3;
+  }
+  
+  100% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 30deg)) translateX(150%);
   }
 }

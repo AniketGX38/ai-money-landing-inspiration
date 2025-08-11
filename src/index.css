@@ -1,3 +1,20 @@
+  /* Fade-in animation utility */
+  .fade-in {
+    opacity: 0;
+    animation: fade-in 0.7s ease-out forwards;
+    /* You can override animation-delay inline or in other classes */
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,10 +57,10 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Copilot Intelligence specific tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(204 94% 94%) 100%);
-    --gradient-background: linear-gradient(135deg, hsl(215 28% 7%) 0%, hsl(215 30% 10%) 50%, hsl(217 32% 12%) 100%);
-    --gradient-hero: linear-gradient(180deg, transparent 0%, hsl(217 91% 60% / 0.1) 50%, transparent 100%);
-    --gradient-beam: conic-gradient(from 0deg at 50% 50%, transparent 0deg, hsl(217 91% 60% / 0.1) 60deg, hsl(204 94% 94% / 0.05) 120deg, transparent 180deg, hsl(217 91% 60% / 0.1) 240deg, hsl(204 94% 94% / 0.05) 300deg, transparent 360deg);
+    --gradient-primary: linear-gradient(135deg, hsl(194, 94%, 61%) 0%, hsl(203, 76%, 77%) 100%);
+    --gradient-background: linear-gradient(circle, hsl(210, 33%, 1%) 45%, hsl(215 30% 10%) 50%, hsl(217 32% 12%) 45%);
+    --gradient-hero: linear-gradient(180deg, transparent 0%, hsla(213, 27%, 6%, 0.1) 50%, transparent 100%);
+    --gradient-beam: conic-gradient(from 0deg at 50% 50%, transparent 0deg, hsla(217, 51%, 52%, 0.1) 60deg, hsla(210, 20%, 6%, 0.05) 120deg, transparent 180deg, hsl(217 91% 60% / 0.1) 240deg, hsl(204 94% 94% / 0.05) 300deg, transparent 360deg);
     --gradient-beam-radial: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(217 91% 60% / 0.15) 0%, transparent 60%);
     --glow-primary: 0 0 40px hsl(217 91% 60% / 0.3);
     --shadow-card: 0 10px 30px -5px hsl(215 28% 5% / 0.5);
@@ -74,6 +91,8 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 }
+
+
 
 @layer utilities {
   .text-gradient {
@@ -138,21 +157,31 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Hide scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary) / 0.3);
-    border-radius: 3px;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.5);
+    background: transparent;
+  }
+
+  /* Hide scrollbar for Firefox */
+  html {
+    scrollbar-width: none;
+  }
+
+  /* Hide scrollbar for IE and Edge */
+  body {
+    -ms-overflow-style: none;
   }
 }

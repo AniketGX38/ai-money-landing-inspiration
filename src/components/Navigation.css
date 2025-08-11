@@ -1,3 +1,49 @@
+/* Section fade effect when behind navbar - only affects the overlapping part */
+.fade-behind-navbar {
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-behind-navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px; /* Height of the navbar plus buffer */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 40px,
+    rgba(255, 255, 255, 0.4) 70px,
+    rgba(255, 255, 255, 0.1) 90px,
+    transparent 100px
+  );
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .fade-behind-navbar::before {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.7) 40px,
+      rgba(0, 0, 0, 0.4) 70px,
+      rgba(0, 0, 0, 0.1) 90px,
+      transparent 100px
+    );
+  }
+}
+
+.fade-behind-navbar > * {
+  position: relative;
+  z-index: 2;
+}
 /* Navigation Styles */
 .navigation {
   position: fixed;
@@ -5,10 +51,8 @@
   left: 0;
   right: 0;
   z-index: 50;
-  background: hsl(var(--background) / 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.5s ease-out;
+  background: none;
+  transition: fade-out 2s ease-in-out;
 }
 
 .navigation.hidden {
@@ -19,12 +63,13 @@
 .navigation.visible {
   transform: translateY(0);
   opacity: 1;
+  box-shadow: inset 0 50px 40px -10px rgba(0, 0, 0, 1);
 }
 
 .navigation-container {
   max-width: 112rem;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 16px 90px;
 }
 
 .navigation-content {
@@ -43,11 +88,15 @@
 .navigation-logo-icon {
   width: 40px;
   height: 40px;
-  background: var(--gradient-primary);
-  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+}
+
+.navigation-logo-icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .navigation-logo-text {

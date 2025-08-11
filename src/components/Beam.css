@@ -1,0 +1,306 @@
+/* Grid Plate Background */
+.hero-grid-plate {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    /* Main grid lines */
+    linear-gradient(to right, 
+      hsla(220, 100%, 90%, 0.4) 1px, 
+      transparent 1px),
+    linear-gradient(to bottom, 
+      hsla(220, 100%, 90%, 0.4) 1px, 
+      transparent 1px),
+    /* Secondary grid lines */
+    linear-gradient(to right, 
+      hsla(200, 80%, 85%, 0.2) 1px, 
+      transparent 1px),
+    linear-gradient(to bottom, 
+      hsla(200, 80%, 85%, 0.2) 1px, 
+      transparent 1px);
+  background-size: 
+    32px 1px,    /* Primary horizontal */
+    1px 32px,    /* Primary vertical */
+    64px 1px,    /* Secondary horizontal */
+    1px 64px;    /* Secondary vertical */
+  background-position: 
+    0 0,
+    0 0,
+    16px 0,
+    0 16px;
+  opacity: 0.6;
+  animation: grid-drift 25s linear infinite;
+  mask: radial-gradient(ellipse 80% 60% at center, black 0%, transparent 100%);
+  -webkit-mask: radial-gradient(ellipse 80% 60% at center, black 0%, transparent 100%);
+  z-index: 1;
+}
+
+/* Base beam styles that fade when hitting the grid */
+.hero-beam {
+  position: absolute;
+  width: 25%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    hsl(var(--primary) / 0.4) 20%,
+    hsl(var(--primary) / 0.6) 40%,
+    hsl(var(--primary) / 0.8) 50%,
+    hsl(var(--primary) / 0.9) 80%,
+    hsl(var(--primary) / 1) 100%,
+    transparent 100%
+  );
+  transform-origin: center;
+  opacity: 0;
+  filter: blur(0.5px);
+  z-index: 2;
+}
+
+/* Beams from different angles - sequential one-at-a-time animation */
+.beam-1 {
+  top: 30%;
+  left: -30%;
+  transform: rotate(45deg);
+  animation: beam-fade-collision 4s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.beam-2 {
+  top: 20%;
+  right: -30%;
+  transform: rotate(-45deg);
+  animation: beam-fade-collision-right 4s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+.beam-3 {
+  top: -20%;
+  left: 40%;
+  transform: rotate(90deg);
+  animation: beam-fade-collision-top 4s ease-in-out infinite;
+  animation-delay: 10s;
+}
+
+.beam-4 {
+  bottom: -20%;
+  left: 60%;
+  transform: rotate(-90deg);
+  animation: beam-fade-collision-bottom 4s ease-in-out infinite;
+  animation-delay: 15s;
+}
+
+/* Beam animations - sequential one-at-a-time with complete fade cycle */
+@keyframes beam-fade-collision {
+  0%, 80% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(-100%);
+  }
+  
+  5% {
+    opacity: 0.3;
+  }
+  
+  15% {
+    opacity: 1;
+  }
+  
+  35% {
+    opacity: 1;
+    transform: rotate(45deg) translateX(30%);
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: rotate(45deg) translateX(60%);
+  }
+  
+  65% {
+    opacity: 0.2;
+    transform: rotate(45deg) translateX(80%);
+  }
+  
+  75% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(100%);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(-100%);
+  }
+}
+
+@keyframes beam-fade-collision-right {
+  0%, 80% {
+    opacity: 0;
+    transform: rotate(-45deg) translateX(100%);
+  }
+  
+  5% {
+    opacity: 0.3;
+  }
+  
+  15% {
+    opacity: 1;
+  }
+  
+  35% {
+    opacity: 1;
+    transform: rotate(-45deg) translateX(-30%);
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: rotate(-45deg) translateX(-60%);
+  }
+  
+  65% {
+    opacity: 0.2;
+    transform: rotate(-45deg) translateX(-80%);
+  }
+  
+  75% {
+    opacity: 0;
+    transform: rotate(-45deg) translateX(-100%);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) translateX(100%);
+  }
+}
+
+@keyframes beam-fade-collision-top {
+  0%, 80% {
+    opacity: 0;
+    transform: rotate(90deg) translateY(-100%);
+  }
+  
+  5% {
+    opacity: 0.3;
+  }
+  
+  15% {
+    opacity: 1;
+  }
+  
+  35% {
+    opacity: 1;
+    transform: rotate(90deg) translateY(30%);
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: rotate(90deg) translateY(60%);
+  }
+  
+  65% {
+    opacity: 0.2;
+    transform: rotate(90deg) translateY(80%);
+  }
+  
+  75% {
+    opacity: 0;
+    transform: rotate(90deg) translateY(100%);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: rotate(90deg) translateY(-100%);
+  }
+}
+
+@keyframes beam-fade-collision-bottom {
+  0%, 80% {
+    opacity: 0;
+    transform: rotate(-90deg) translateY(100%);
+  }
+  
+  5% {
+    opacity: 0.3;
+  }
+  
+  15% {
+    opacity: 1;
+  }
+  
+  35% {
+    opacity: 1;
+    transform: rotate(-90deg) translateY(-30%);
+  }
+  
+  50% {
+    opacity: 0.5;
+    transform: rotate(-90deg) translateY(-60%);
+  }
+  
+  65% {
+    opacity: 0.2;
+    transform: rotate(-90deg) translateY(-80%);
+  }
+  
+  75% {
+    opacity: 0;
+    transform: rotate(-90deg) translateY(-100%);
+  }
+  
+  100% {
+    opacity: 0;
+    transform: rotate(-90deg) translateY(100%);
+  }
+}
+
+/* Grid drift animation */
+@keyframes grid-drift {
+  0% {
+    background-position: 
+      0 0,
+      0 0,
+      16px 0,
+      0 16px;
+  }
+  100% {
+    background-position: 
+      32px 0,
+      0 32px,
+      48px 0,
+      0 48px;
+  }
+}
+
+/* Enhanced version with collision glow effect */
+.hero-scene-enhanced {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.collision-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    hsla(var(--primary-hue, 220), 100%, 90%, 0.1) 0%,
+    hsla(var(--primary-hue, 220), 100%, 90%, 0.05) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  animation: collision-pulse 4s ease-out infinite;
+  z-index: 0;
+}
+
+@keyframes collision-pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}

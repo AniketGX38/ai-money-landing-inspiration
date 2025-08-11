@@ -1,6 +1,7 @@
 import { Download, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import "./Navigation.css";
+import LogoSVG from "./logo";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,11 +16,40 @@ const Navigation = () => {
           // Get viewport height to determine when second section is in center
           const viewportHeight = window.innerHeight;
           const scrollPosition = window.scrollY;
+          const navbarHeight = 100; // Navbar height plus some buffer
           
           // Show navbar when user has scrolled past the first section (roughly viewport height)
           const showNavThreshold = viewportHeight * 0.8; // Show when 80% through first section
           
           setIsVisible(scrollPosition > showNavThreshold);
+          
+          // Apply fade effect to sections that are behind the navbar
+          if (scrollPosition > showNavThreshold) {
+            const sections = document.querySelectorAll('.hero-section, .features-section, .cta-section, .footer');
+            
+            sections.forEach((section) => {
+              const rect = section.getBoundingClientRect();
+              const sectionTop = rect.top;
+              const sectionBottom = rect.bottom;
+              
+              // Check if the top part of the section is intersecting with navbar area
+              const isTopPartBehindNavbar = sectionTop < navbarHeight && sectionTop > -50; // Some tolerance
+              const hasContentBehindNavbar = sectionBottom > 0 && sectionTop < navbarHeight;
+              
+              if (hasContentBehindNavbar && isTopPartBehindNavbar) {
+                section.classList.add('fade-behind-navbar');
+              } else {
+                section.classList.remove('fade-behind-navbar');
+              }
+            });
+          } else {
+            // Remove fade from all sections when navbar is hidden
+            const sections = document.querySelectorAll('.hero-section, .features-section, .cta-section, .footer');
+            sections.forEach((section) => {
+              section.classList.remove('fade-behind-navbar');
+            });
+          }
+          
           ticking = false;
         });
         ticking = true;
@@ -43,7 +73,7 @@ const Navigation = () => {
           {/* Logo */}
           <div className="navigation-logo">
             <div className="navigation-logo-icon">
-              <span className="text-background font-bold text-lg">C</span>
+              <LogoSVG />
             </div>
             <span className="navigation-logo-text">X38</span>
           </div>

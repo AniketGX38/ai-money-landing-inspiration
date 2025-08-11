@@ -1,20 +1,23 @@
-/* Footer Styles */
+/* Footer Styles - Digital AI Theme */
 .footer {
-  padding: 64px 24px;
+  padding: 96px 24px 48px;
   background: transparent;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid hsl(var(--border) / 0.1);
 }
 
+/* Enhanced Background Effects */
 .footer::before {
   content: '';
   position: absolute;
   inset: 0;
   background: 
-    linear-gradient(180deg, transparent 0%, hsl(var(--border) / 0.03) 30%, hsl(var(--border) / 0.08) 100%),
-    radial-gradient(ellipse 1000px 300px at 50% 100%, hsl(var(--primary) / 0.02) 0%, transparent 70%);
+    radial-gradient(ellipse 1000px 400px at 50% 0%, hsl(var(--primary) / 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 300px at 20% 100%, hsl(var(--accent) / 0.03) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 0%, hsl(var(--border) / 0.02) 50%, hsl(var(--border) / 0.05) 100%);
   pointer-events: none;
-  animation: footer-glow 20s ease-in-out infinite;
+  animation: footer-glow 18s ease-in-out infinite;
   z-index: 0;
 }
 
@@ -23,13 +26,112 @@
   position: absolute;
   inset: 0;
   background: 
-    conic-gradient(from 180deg at 20% 100%, transparent 0deg, hsl(var(--accent) / 0.015) 30deg, transparent 90deg),
-    conic-gradient(from 0deg at 80% 100%, transparent 0deg, hsl(var(--primary) / 0.01) 45deg, transparent 120deg);
+    conic-gradient(from 180deg at 30% 100%, transparent 0deg, hsl(var(--accent) / 0.015) 30deg, transparent 90deg),
+    conic-gradient(from 0deg at 70% 100%, transparent 0deg, hsl(var(--primary) / 0.02) 45deg, transparent 120deg);
   pointer-events: none;
   animation: footer-glow 16s ease-in-out infinite reverse;
   z-index: 0;
 }
 
+/* Beam Effects */
+.footer-beam-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.footer-beam-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 30% at 50% 0%, hsl(var(--primary) / 0.1) 0%, transparent 60%);
+  animation: beam-pulse 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.footer-beam-diagonal {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 60%;
+  height: 0.5px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    hsl(var(--primary) / 0.2) 20%,
+    hsl(var(--primary) / 0.4) 40%,
+    hsl(var(--primary) / 0.6) 50%,
+    hsl(var(--primary) / 0.4) 60%,
+    hsl(var(--primary) / 0.2) 80%,
+    transparent 100%
+  );
+  transform: rotate(8deg);
+  transform-origin: center;
+  opacity: 0;
+  animation: footer-beam-sweep 10s ease-in-out infinite;
+  filter: blur(0.3px);
+}
+
+.footer-beam-diagonal-2 {
+  position: absolute;
+  top: 60%;
+  right: 20%;
+  width: 40%;
+  height: 0.3px;
+  background: linear-gradient(
+    to left,
+    transparent 0%,
+    hsl(var(--accent) / 0.15) 25%,
+    hsl(var(--accent) / 0.3) 50%,
+    hsl(var(--accent) / 0.15) 75%,
+    transparent 100%
+  );
+  transform: rotate(-12deg);
+  transform-origin: center;
+  opacity: 0;
+  animation: footer-beam-sweep 12s ease-in-out infinite reverse;
+  animation-delay: 4s;
+  filter: blur(0.2px);
+}
+
+/* Floating Elements */
+.footer-floating-element {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+.footer-floating-1 {
+  top: 30%;
+  left: 20%;
+  width: 4px;
+  height: 4px;
+  background: hsl(var(--primary));
+  opacity: 0.4;
+  animation-delay: 0s;
+}
+
+.footer-floating-2 {
+  top: 70%;
+  right: 30%;
+  width: 3px;
+  height: 3px;
+  background: hsl(var(--accent));
+  opacity: 0.3;
+  animation-delay: 1.5s;
+}
+
+.footer-floating-3 {
+  bottom: 40%;
+  left: 70%;
+  width: 5px;
+  height: 5px;
+  background: hsl(var(--primary));
+  opacity: 0.5;
+  animation-delay: 3s;
+}
+
+/* Container */
 .footer-container {
   max-width: 112rem;
   margin: 0 auto;
@@ -39,27 +141,35 @@
 
 .footer-content {
   display: grid;
-  gap: 32px;
-  margin-bottom: 48px;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
 }
 
 /* Logo Section */
 .footer-logo-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
+  max-width: 400px;
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.footer-logo:hover {
+  transform: translateY(-2px);
 }
 
 .footer-logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--gradient-primary);
+  width: 48px;
+  height: 48px;
+  background: transparent;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -68,70 +178,111 @@
 
 .footer-logo-text {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  color: hsl(var(--foreground));
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .footer-description {
+  font-size: 1rem;
+  line-height: 1.6;
   color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* Social Links */
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Spacer for visual balance */
+.footer-spacer {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .footer-spacer {
+    display: block;
+  }
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: hsl(var(--secondary) / 0.5);
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  border: 1px solid hsl(var(--border) / 0.3);
+  backdrop-filter: blur(12px);
+}
+
+.footer-social-link:hover {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border-color: hsl(var(--primary) / 0.3);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px hsl(var(--primary) / 0.15),
+    0 0 30px hsl(var(--primary) / 0.1);
 }
 
 /* Links Section */
 .footer-links-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .footer-links-title {
+  font-size: 1.25rem;
   font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0 0 16px 0;
 }
 
 .footer-links-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .footer-link {
-  font-size: 0.875rem;
   color: hsl(var(--muted-foreground));
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  padding: 4px 0;
+}
+
+.footer-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
 }
 
 .footer-link:hover {
-  color: hsl(var(--foreground));
+  color: hsl(var(--primary));
+  transform: translateX(4px);
 }
 
-/* Download Section */
-.footer-download-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.footer-download-title {
-  font-weight: 600;
-}
-
-.footer-download-button {
-  background: #ffffff;
-  color: #000000;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+.footer-link:hover::before {
   width: 100%;
-}
-
-.footer-download-button:hover {
-  background: #f3f4f6;
 }
 
 /* Bottom Section */
@@ -140,41 +291,137 @@
   flex-direction: column;
   align-items: center;
   padding-top: 32px;
-  border-top: 1px solid hsl(var(--border) / 0.2);
+  border-top: 1px solid hsl(var(--border) / 0.3);
   gap: 16px;
+  position: relative;
+}
+
+.footer-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--gradient-primary);
+  opacity: 0.8;
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
 .footer-copyright {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: hsl(var(--muted-foreground));
+  text-align: center;
+  margin: 0;
 }
 
-.footer-social {
-  display: flex;
-  gap: 16px;
+.footer-company-link {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.footer-company-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+}
+
+.footer-company-link:hover::after {
+  width: 100%;
 }
 
 /* Responsive Design */
 @media (min-width: 768px) {
   .footer-content {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 0.5fr 1fr;
+    gap: 80px;
+    align-items: start;
   }
   
   .footer-bottom {
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: 0;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding: 120px 24px 64px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 2fr 0.8fr 1fr;
+    gap: 100px;
   }
 }
 
 /* Animations */
 @keyframes footer-glow {
   0%, 100% { 
-    transform: translate(0, 0);
+    transform: translate(0, 0) scale(1);
     opacity: 1;
   }
-  50% { 
-    transform: translate(5px, -5px);
+  33% { 
+    transform: translate(15px, -10px) scale(1.02);
     opacity: 0.8;
+  }
+  66% { 
+    transform: translate(-10px, 15px) scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+@keyframes footer-beam-sweep {
+  0%, 85%, 100% { 
+    opacity: 0;
+    transform: rotate(8deg) translateX(-60%) scaleX(0.5);
+  }
+  10% { 
+    opacity: 0.3;
+    transform: rotate(8deg) translateX(-10%) scaleX(1);
+  }
+  20% { 
+    opacity: 0.6;
+    transform: rotate(8deg) translateX(30%) scaleX(1);
+  }
+  30% { 
+    opacity: 0.3;
+    transform: rotate(8deg) translateX(70%) scaleX(0.5);
+  }
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 4px 20px hsl(var(--primary) / 0.2),
+      0 0 40px hsl(var(--primary) / 0.1);
+  }
+  50% { 
+    box-shadow: 
+      0 4px 25px hsl(var(--primary) / 0.3),
+      0 0 50px hsl(var(--primary) / 0.15);
   }
 }
